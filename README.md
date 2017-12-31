@@ -12,6 +12,12 @@ I suggest you read https://github.com/mihic/linux-intel-undervolt first, especia
 
 ## How to use
 
+Usage:
+```
+iuvolt [CORE_OFFSET GPU_OFFSET CACHE_OFFSET UNCORE_OFFSET ANALOGIO_OFFSET DIGITAL_OFFSET]
+```
+All undervolts are in mV, if you wanna skip an offset, put 0 in its place.
+
 To install the script put it in /usr/bin/iuvolt then use ``` chmod +x ```
 
 The script takes either voltage offsets as parameters, or it'll automatically load them from /etc/iuvolt.cfg
