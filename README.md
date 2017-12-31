@@ -21,11 +21,16 @@ Example that can be used without config:
 iuvolt 90.8 80.1 90.8
 ```
 
+##Credits
+
 The method to calculate the right values, what register to write to using what command to was taken from https://github.com/mihic/linux-intel-undervolt and from http://forum.notebookreview.com/threads/undervolting-e-g-skylake-in-linux.807953 the json and python scripts posted there were very useful. 
 
 All credits go to the notebookreview community, they did pretty much all the work.
 
 All pull requests are welcome.
 
-TODO:
+##TODO
 Make the systemd script work in all scenarios.
+
+##IDEAS
+Implement per-cpu profiles. Users can contribute offsets they've tested on their CPU and found to be safe. That way it saves time for new users with a same CPU.
