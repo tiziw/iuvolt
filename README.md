@@ -4,27 +4,40 @@ Script to undervolt Intel CPUs
 ## What does this script do?
 This script takes voltage offsets (parameters or from config) and converts them to the right HEX values then writes them to the registers responsible for undervolting using the wrmsr command from the msr-tools package.
 
+## Info on undervolting
+I suggest you read https://github.com/mihic/linux-intel-undervolt first, especially the info regarding the voltage planes.
+
 ## How to use
 
 To install the script put it in /usr/bin/iuvolt then use ``` chmod +x ```
 
 The script takes either voltage offsets as parameters, or it'll automatically load them from /etc/iuvolt.cfg
-The config file only needs 1 variable of type array with the name voltages. Example:
+The config file only needs 1 variable of type array with the name voltages. 
+Example without config:
 ```
-voltages=(90.8 80.1 90.8)
+iuvolt -90.8 -80.1 -90.8
 ```
-Everytime iuvolt is ran it'll automatically load the values if the config is present
+Example of config (/etc/iuvolt.cfg)
+```
+voltages=(-90.8 -80.1 -90.8)
+```
+
+Everytime ``` iuvolt ``` without parameters it'll (try to) automatically load the values from the config.
 
 If you use systemd you can put systemd-iuvolt.service into /etc/systemd/system/ and then enable it using 
 ```
 systemctl enable systemd-iuvolt.service
 ```
+The systemd service runs iuvolt without parameters so it's advised that you configure it first.
+
 As for making the script run after sleep, you can make a tiny script that runs iuvolt and put it in /usr/lib/systemd/system-sleep/. (Note that this is a hack)
 Example that can be used without config:
 ```
 #!/bin/bash
-iuvolt 90.8 80.1 90.8
+iuvolt
 ```
+
+You can also run ``` install.sh ``` that'll do the setup for you, all you have to do is edit the config file with the right undervolt parameters, as it'll be empty by default.
 
 ## Credits
 
