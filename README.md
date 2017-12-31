@@ -5,7 +5,7 @@ Experimental script to undervolt Intel CPUs
 This method to undervolt has been found by users at notebookreview forums, no reports of permanent damage have been reported, but it is still experimental. 
 
 ## What does this script do?
-This script takes voltage offsets (parameters or from config) and converts them to the right HEX values then writes them to the registers responsible for undervolting using the wrmsr command from the msr-tools package.
+This script takes voltage offsets (parameters or from config) and converts them to the right HEX values then writes them to the registers responsible for undervolting using the wrmsr command from the msr-tools package. This mechanism is reverse engineered from the windows program ThrottleStop, it writes to the msr 0x150 register.
 
 ## Info on undervolting
 I suggest you read https://github.com/mihic/linux-intel-undervolt first, especially the info regarding the voltage planes. Also read the thread at notebookreview, link in credits. As far as safety, this method is fairly untested, it's been pretty much reverse engineered by the community so beware. Make sure to read the thread as it contains the experience of others, there have been no reports of permanent damage using this method. 
