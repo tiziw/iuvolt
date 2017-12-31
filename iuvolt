@@ -1,0 +1,82 @@
+#!/bin/bash
+
+function round {
+  #echo "got: $1"
+  val=$(printf %0.f\\n $1) 
+  #echo "returned $val"
+  echo ${val}
+}
+
+function calculate {
+  rval=$(round $(echo "($1 * 1.024)" | bc))
+  let "b = 0xFFE00000&(($rval&0xFFF)<<21)"
+  result=$(echo "obase=16; $b" | bc)
+  echo $result
+}
+
+function get {
+	base="0x80000"
+	rw="11"
+	if [ $1 == 'read' ]
+	then
+		rw="10"
+    empty=00000000
+		echo "$base$i$rw$empty"
+		return
+	fi
+	echo "$base$i$rw$hexparam"
+}
+
+#$1 = undervolt amount in hex
+#$2 = voltage plane
+function setvol {
+  outw=$(wrmsr 0x150 $(get "write"))
+	outr=$(wrmsr 0x150 $(get "read"))
+  if [[ "$outw" -ne "" || "$outr" -ne "" ]]; then
+	  echo "wrote to register 0x150: $outw and $outr"
+  fi
+	success=$(rdmsr 0x150)
+	if [ ${success^^} == ${hexparam^^} ]; then
+		echo "wrote $(get "write") successful to plane index $i"
+	else
+		echo "wrote failed, got: $success"
+	fi
+}
+# Make sure only root can run our script
+if [ "$(id -u)" != "0" ]; then
+   echo "This script must be run as root" 1>&2
+   exit 1
+fi
+
+
+if [ ${#} -gt 0 ]; then
+  voltages=($@)
+  size=${#}
+  #echo $voltages
+  #echo ${#}
+  for ((i=0; i<${size};i++ )); do
+      if ! [[ ${voltages[${i}]} =~ ^[-+]?[0-9]+\.?[0-9]*$ ]]; then
+        echo "Voltage offsets must be numbers!"
+        exit 1
+      fi
+  done
+else
+  if [ -r /etc/iuvolt.cfg ]; then
+    source /etc/iuvolt.cfg
+  elif [ ${#voltages[@]} -gt 0 ]; then
+    echo "Loaded offsets: $voltages from /etc/iuvolt.cfg"
+  else
+    echo "Usage: iuvolt [offset_0 offset_1 offset_2]"
+    echo "Or create /etc/iuvolt.cfg"
+    echo "Example of iuvolt.cfg:"
+    echo "voltages=(-90.4 0 -10.5)"
+    exit 1
+  fi
+fi
+
+size=${#voltages[@]}
+for ((i=0; i<${size}; i++ ));
+do
+  hexparam=$(calculate ${voltages[${i}]})
+  setvol $hexparam $i
+done
