@@ -3,7 +3,7 @@ Description=Undervolt cpu
 
 [Service]
 Type=oneshot
-ExecStart=/usr/local/bin/uvolt
+ExecStart=/usr/bin/uvolt
 
 [Install]
 WantedBy=default.target
