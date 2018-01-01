@@ -10,6 +10,9 @@ This script takes voltage offsets (parameters or from config) and converts them 
 ## Info on undervolting
 I suggest you read https://github.com/mihic/linux-intel-undervolt first, especially the info regarding the voltage planes. Also read the thread at notebookreview, link in credits. As far as safety, this method is fairly untested, it's been pretty much reverse engineered by the community so beware. Make sure to read the thread as it contains the experience of others, there have been no reports of permanent damage using this method. 
 
+## Requirements
+This script depends on ``` msr-tools ``` for writing/reading to registers and ``` bc ``` for floating-point arithmetic.
+
 ## How to use
 
 Usage:
