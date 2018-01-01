@@ -1,10 +1,18 @@
 #!/bin/bash
 
 function round {
-  #echo "got: $1"
   val=$(printf %0.f\\n $1) 
-  #echo "returned $val"
   echo ${val}
+}
+
+function printcfg {
+  size=${#voltages[@]}
+  text="Loaded config!"
+  vals=("CPU Core" "GPU" "Cache" "Uncore" "Analog" "Digital")
+  for ((i=0;i<${size};i++ )); do
+    text="$text ${vals[${i}]} : ${voltages[${i}]}mV,"
+  done
+  echo "$text"
 }
 
 function calculate {
@@ -63,8 +71,9 @@ if [ ${#} -gt 0 ]; then
 else
   if [ -r /etc/iuvolt.cfg ]; then
     source /etc/iuvolt.cfg
-  elif [ ${#voltages[@]} -gt 0 ]; then
-    echo "Loaded offsets: $voltages from /etc/iuvolt.cfg"
+  fi
+  if [ ${#voltages[@]} -gt 0 ]; then
+    echo $(printcfg)
   else
     echo "Usage: iuvolt [offset_0 offset_1 offset_2]"
     echo "Or create /etc/iuvolt.cfg"
