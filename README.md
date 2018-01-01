@@ -62,5 +62,5 @@ All pull requests are welcome.
 ## TODO
 Make the systemd script work in all scenarios.
 
-## IDEAS
+## Ideas
 Implement per-cpu profiles. Users can contribute offsets they've tested on their CPU and found to be safe. That way it saves time for new users with a same CPU.
