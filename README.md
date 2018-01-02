@@ -53,14 +53,7 @@ If you use systemd you can put systemd-iuvolt.service into /etc/systemd/system/ 
 ```
 systemctl enable systemd-iuvolt.service
 ```
-The systemd service runs iuvolt without parameters so it's advised that you configure it first.
-
-As for making the script run after sleep, you can make a tiny script that runs iuvolt and put it in /usr/lib/systemd/system-sleep/. (Note that this is a hack)
-Example that can be used without config:
-```
-#!/bin/bash
-iuvolt
-```
+Systemd will run iuvolt on boot and on/after sleep. The systemd service runs iuvolt without parameters so you'll have to set the values using the config file first.
 
 You can also run ``` install.sh ``` that'll do the setup for you, all you have to do is edit the config file with the right undervolt parameters, as it'll have 0 values by default.
 
