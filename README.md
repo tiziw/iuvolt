@@ -13,13 +13,26 @@ I suggest you read https://github.com/mihic/linux-intel-undervolt first, especia
 ## Requirements
 This script depends on ``` msr-tools ``` for writing/reading to registers and ``` bc ``` for floating-point arithmetic.
 
+## Installation
+```
+git clone https://github.com/tiziw/iuvolt.git
+cd iuvolt && sudo chmod +x install.sh
+sudo ./install.sh
+
+#Experiment with right values
+sudo iuvolt -90 -80 -90
+
+#Save values to config
+vi /etc/iuvolt.cfg
+```
+
 ## How to use
 
 Usage:
 ```
 iuvolt [CORE_OFFSET GPU_OFFSET CACHE_OFFSET UNCORE_OFFSET ANALOGIO_OFFSET DIGITAL_OFFSET]
 ```
-All undervolts are in mV, if you wanna skip an offset, put 0 in its place.
+All undervolts are in mV, if you wanna skip an offset, put 0 in its place. The CPU Core and Cache share the same voltage plane. If you define 2 different offsets for them then the highest of the 2 will be chosen. Uncore and AnalogIO are highly experimental and haven't been tested, digital offset is greyed out in ThrottleStop and is either not functional or unsupported.
 
 To install the script put it in /usr/bin/iuvolt then use ``` chmod +x ```
 
@@ -49,7 +62,7 @@ Example that can be used without config:
 iuvolt
 ```
 
-You can also run ``` install.sh ``` that'll do the setup for you, all you have to do is edit the config file with the right undervolt parameters, as it'll be empty by default.
+You can also run ``` install.sh ``` that'll do the setup for you, all you have to do is edit the config file with the right undervolt parameters, as it'll have 0 values by default.
 
 ## Credits
 
