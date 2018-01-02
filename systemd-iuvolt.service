@@ -1,6 +1,6 @@
 [Unit]
 Description=Undervolt cpu
-After=suspend.target
+After=sleep.target
 
 [Service]
 Type=simple
@@ -9,4 +9,4 @@ ExecStop=/usr/bin/iuvolt
 
 [Install]
 WantedBy=multi-user.target
-WantedBy=suspend.target
+WantedBy=sleep.target
