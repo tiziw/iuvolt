@@ -7,5 +7,5 @@ fi
 cp iuvolt /usr/bin/
 chmod +x /usr/bin/iuvolt
 cp systemd-iuvolt.service /etc/systemd/system/
-systemctl enable iuvolt.service
+systemctl enable systemd-iuvolt.service
 echo "voltages=(0 0 0)" >> /etc/iuvolt.cfg
