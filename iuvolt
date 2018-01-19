@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export LC_NUMERIC="en_US.UTF-8"
+
 function round {
   val=$(printf %0.f\\n $1) 
   echo ${val}
