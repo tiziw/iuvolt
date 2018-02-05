@@ -1,6 +1,6 @@
 [Unit]
 Description=Undervolt cpu
-After=sleep.target
+After=sleep.target suspend.target hibernate.target
 
 [Service]
 Type=simple
