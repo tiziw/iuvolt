@@ -1,9 +1,9 @@
 #!/bin/bash
 
-export LC_NUMERIC="en_US.UTF-8"
+LC_NUMERIC="C"
 
 function round {
-  val=$(LC_NUMERIC=C printf %0.f\\n $1) 
+  val=$(printf %0.f\\n $1) 
   echo ${val}
 }
 
