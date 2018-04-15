@@ -13,6 +13,11 @@ I suggest you read https://github.com/mihic/linux-intel-undervolt first, especia
 ## Requirements
 This script depends on ``` msr-tools ``` for writing/reading to registers and ``` bc ``` for floating-point arithmetic. Make sure the msr module is loaded using ``` lsmod | grep msr ```. If it's not loaded then you'll have to manually configure it to load on boot, if you want to load it temporarily use ``` modprobe msr ```.
 
+## Supported CPUs
+Theoretically, this method of undervolting works only with `3rd gen Intel CPUs` and newer. It's been noted in the notebookreview forum thread that Intel Secure Boot blocks the wrmsr command from working properly and has to be disabled for this method to work.
+
+For Intel CPUs older than 3rd gen the PHC method has to be used. More info on do it can be found at https://wiki.archlinux.org/index.php/PHC.
+
 ## Installation
 ```
 git clone https://github.com/tiziw/iuvolt.git
