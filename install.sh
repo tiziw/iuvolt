@@ -6,6 +6,6 @@ if [ "$(id -u)" != "0" ]; then
 fi
 cp iuvolt /usr/bin/
 chmod +x /usr/bin/iuvolt
-cp systemd-iuvolt.service /etc/systemd/system/
-systemctl enable systemd-iuvolt.service
+cp iuvolt.service /etc/systemd/system/
+systemctl enable iuvolt.service
 echo "voltages=(0 0 0)" >> /etc/iuvolt.cfg
