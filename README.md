@@ -56,11 +56,13 @@ Everytime ``` iuvolt ``` without parameters it'll (try to) automatically load th
 
 If you use systemd you can put systemd-iuvolt.service into /etc/systemd/system/ and then enable it using 
 ```
-systemctl enable systemd-iuvolt.service
+systemctl enable iuvolt.service
 ```
 Systemd will run iuvolt on boot and on/after sleep. The systemd service runs iuvolt without parameters so you'll have to set the values using the config file first.
 
 You can also run ``` install.sh ``` that'll do the setup for you, all you have to do is edit the config file with the right undervolt parameters, as it'll have 0 values by default.
+
+In order to update your version of the script, clone the repository then run update.sh as root.
 
 ## Credits
 
